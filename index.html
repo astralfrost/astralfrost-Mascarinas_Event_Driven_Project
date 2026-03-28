@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>event horizon · interactive news</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- overlay + sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="dynamicSidebar">
+        <h3>📋 news categories</h3>
+        <ul>
+            <li data-target="climate">🌍 Global Climate Summit</li>
+            <li data-target="ai">🤖 Breakthrough in AI</li>
+            <li data-target="election">🗳️ Election Results 2025</li>
+            <li data-target="space">🚀 Space Mission Update</li>
+            <li data-target="market">📈 Market Rally Records</li>
+        </ul>
+        <button class="close-sidebar-btn" id="closeSidebarBtn">✕ close sidebar</button>
+    </aside>
+
+    <!-- Back to Home Button -->
+    <button class="back-to-home" id="backToHomeBtn" aria-label="Back to home">🏠</button>
+
+    <div class="main-content" id="mainContent">
+        <div class="toolbar">
+            <span class="logo">📰 EVENT HORIZON • INTERACTIVE</span>
+            <div class="btn-group">
+                <button id="alertBtn">⏰ breaking news</button>
+                <button id="themeBtn">🌙 dark tint</button>
+                <button class="open-sidebar-btn" id="openSidebarBtn">☰ sidebar</button>
+            </div>
+        </div>
+
+        <!-- HOME SECTION -->
+        <div id="home" class="home-section">
+            <div class="parallax-container">
+                <div class="parallax-img"></div>
+                <div class="parallax-caption">🏙️ horizon pulse · front page</div>
+            </div>
+
+            <h2 class="scroll-animate" style="margin-top: 1rem;">📌 top headlines</h2>
+            <div class="news-grid">
+                <div class="card scroll-animate">
+                    <h3>💰 economy</h3><span class="date">just now</span>
+                    <p>interest rates hold steady, markets cheer</p>
+                </div>
+                <div class="card scroll-animate">
+                    <h3>⚡ energy</h3><span class="date">1h ago</span>
+                    <p>new solar efficiency record achieved</p>
+                </div>
+                <div class="card scroll-animate">
+                    <h3>🧬 health</h3><span class="date">3h ago</span>
+                    <p>personalized vaccines show promise</p>
+                </div>
+                <div class="card scroll-animate">
+                    <h3>🌍 world</h3><span class="date">5h ago</span>
+                    <p>peace talks resume in geneva</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- LIVE BRIEFING SECTION (BREAKING NEWS TARGET) -->
+        <div id="liveBriefing" class="video-section scroll-animate">
+            <h2>📺 BRIEFING · BREAKING NEWS</h2>
+            <div class="topic-description">
+                <strong>🔴 COVERAGE</strong> - Breaking news updates, real-time analysis, and expert insights on the most important stories happening right now.
+            </div>
+            <video id="newsVideo" class="video-player" controls preload="metadata" 
+                <source src="news.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-controls">
+                <button class="video-btn" id="playBtn">▶ play</button>
+                <button class="video-btn" id="pauseBtn">⏸️ pause</button>
+                <button class="video-btn" id="restartBtn">🔄 restart</button>
+            </div>
+            <div class="video-status" id="videoMessage">⚡ BREAKING NEWS · live coverage ready</div>
+        </div>
+
+        <!-- CLIMATE SUMMIT VIDEO SECTION -->
+        <div id="climate" class="video-section scroll-animate">
+            <h2>🌍 Global Climate Summit 2025</h2>
+            <div class="topic-description">
+                <strong>📍 Copenhagen, Denmark</strong> - World leaders gather to discuss critical climate action, carbon neutrality goals, and renewable energy transition.
+            </div>
+            <video id="climateVideo" class="video-player" controls preload="metadata" 
+                <source src="climate.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-controls">
+                <button class="video-btn play-specific" data-video="climateVideo">▶ play</button>
+                <button class="video-btn pause-specific" data-video="climateVideo">⏸️ pause</button>
+                <button class="video-btn restart-specific" data-video="climateVideo">🔄 restart</button>
+            </div>
+            <div class="video-status" id="climateStatus">⚡ Latest: Carbon neutrality pledges announced</div>
+        </div>
+
+        <!-- AI BREAKTHROUGH VIDEO SECTION -->
+        <div id="ai" class="video-section scroll-animate">
+            <h2>🤖 Breakthrough in AI: GPT-5 Released</h2>
+            <div class="topic-description">
+                <strong>📍 San Francisco, USA</strong> - Revolutionary AI model demonstrates human-like reasoning, creative problem-solving, and ethical decision-making capabilities.
+            </div>
+            <video id="aiVideo" class="video-player" controls preload="metadata" 
+                <source src="ai.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-controls">
+                <button class="video-btn play-specific" data-video="aiVideo">▶ play</button>
+                <button class="video-btn pause-specific" data-video="aiVideo">⏸️ pause</button>
+                <button class="video-btn restart-specific" data-video="aiVideo">🔄 restart</button>
+            </div>
+            <div class="video-status" id="aiStatus">🤖 AI passes Turing test 2.0 with 98% accuracy</div>
+        </div>
+
+        <!-- ELECTION RESULTS VIDEO SECTION -->
+        <div id="election" class="video-section scroll-animate">
+            <h2>🗳️ Election Results 2025</h2>
+            <div class="topic-description">
+                <strong>📍 Washington D.C., USA</strong> - Historic voter turnout shapes the future of American politics with unprecedented youth participation.
+            </div>
+            <video id="electionVideo" class="video-player" controls preload="metadata" 
+                <source src="election.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-controls">
+                <button class="video-btn play-specific" data-video="electionVideo">▶ play</button>
+                <button class="video-btn pause-specific" data-video="electionVideo">⏸️ pause</button>
+                <button class="video-btn restart-specific" data-video="electionVideo">🔄 restart</button>
+            </div>
+            <div class="video-status" id="electionStatus">🗳️ Final results: Landslide victory in key states</div>
+        </div>
+
+        <!-- SPACE MISSION VIDEO SECTION -->
+        <div id="space" class="video-section scroll-animate">
+            <h2>🚀 Space Mission Update: Mars Colony</h2>
+            <div class="topic-description">
+                <strong>📍 Cape Canaveral, Florida</strong> - NASA's Artemis mission successfully establishes first permanent habitat on Mars, opening new frontiers.
+            </div>
+            <video id="spaceVideo" class="video-player" controls preload="metadata"
+                <source src="space.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-controls">
+                <button class="video-btn play-specific" data-video="spaceVideo">▶ play</button>
+                <button class="video-btn pause-specific" data-video="spaceVideo">⏸️ pause</button>
+                <button class="video-btn restart-specific" data-video="spaceVideo">🔄 restart</button>
+            </div>
+            <div class="video-status" id="spaceStatus">🚀 First Mars colony established - 12 astronauts now on surface</div>
+        </div>
+
+        <!-- MARKET RALLY VIDEO SECTION -->
+        <div id="market" class="video-section scroll-animate">
+            <h2>📈 Market Rally Records</h2>
+            <div class="topic-description">
+                <strong>📍 New York Stock Exchange</strong> - Tech stocks surge as AI and green energy sectors drive unprecedented market growth.
+            </div>
+            <video id="marketVideo" class="video-player" controls preload="metadata"
+                <source src="market.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-controls">
+                <button class="video-btn play-specific" data-video="marketVideo">▶ play</button>
+                <button class="video-btn pause-specific" data-video="marketVideo">⏸️ pause</button>
+                <button class="video-btn restart-specific" data-video="marketVideo">🔄 restart</button>
+            </div>
+            <div class="video-status" id="marketStatus">📊 S&P 500 hits all-time high, Dow jumps 1000 points</div>
+        </div>
+
+        <!-- subscription form -->
+        <div class="subscribe-box" id="subscribeForm">
+            <h2>📬 catch every event</h2>
+            <p>subscribe to our interactive report</p>
+            <form id="newsForm">
+                <div class="form-group">
+                    <input type="email" id="emailInput" placeholder="your email address" required>
+                    <button type="submit" id="submitBtn">subscribe</button>
+                </div>
+                <div id="formFeedback"></div>
+            </form>
+        </div>
+
+        <footer>
+            <span class="resize-note" id="resizeIndicator">📐 resize window → fluid grid</span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
