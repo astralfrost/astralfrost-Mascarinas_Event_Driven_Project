@@ -220,7 +220,7 @@
             }
         }, 600);
 
-        showNotification('Returned to front page');
+        showNotification('Returned');
         console.log('Navigated back to home');
     }
 
