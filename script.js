@@ -9,14 +9,14 @@
     const alertBtn = document.getElementById('alertBtn');
     const themeBtn = document.getElementById('themeBtn');
     const backToHomeBtn = document.getElementById('backToHomeBtn');
-    
+
     // Live briefing video elements
     const liveVideo = document.getElementById('newsVideo');
     const playBtn = document.getElementById('playBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const restartBtn = document.getElementById('restartBtn');
     const videoMsg = document.getElementById('videoMessage');
-    
+
     // Form elements
     const form = document.getElementById('newsForm');
     const emailInput = document.getElementById('emailInput');
@@ -29,11 +29,11 @@
         if (theme === 'dark') {
             body.classList.add('dark');
             localStorage.setItem('eventTheme', 'dark');
-            themeBtn.innerHTML = '☀️ light tint';
+            themeBtn.innerHTML = 'light tint';
         } else {
             body.classList.remove('dark');
             localStorage.setItem('eventTheme', 'light');
-            themeBtn.innerHTML = '🌙 dark tint';
+            themeBtn.innerHTML = 'dark tint';
         }
     }
 
@@ -53,7 +53,7 @@
         setTheme('light');
     } else {
         if (!document.body.classList.contains('dark')) {
-            themeBtn.innerHTML = '🌙 dark tint';
+            themeBtn.innerHTML = 'dark tint';
         }
     }
 
@@ -85,45 +85,45 @@
         if (targetSection) {
             // Close sidebar
             closeSidebar();
-            
+
             // Smooth scroll to the section
-            targetSection.scrollIntoView({ 
-                behavior: 'smooth', 
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
                 block: 'start'
             });
-            
+
             // Add highlight effect
             targetSection.style.animation = 'none';
             targetSection.offsetHeight; // Trigger reflow
             targetSection.style.animation = 'sectionGlow 0.6s ease-out';
-            
+
             // Update URL hash without jumping
             history.pushState(null, null, `#${sectionId}`);
-            
+
             // Show toast notification if enabled
             if (showNotificationMsg) {
-                showNotification(`📺 Now showing: ${sectionTitle}`);
+                showNotification(`Now showing: ${sectionTitle}`);
             }
-            
+
             // Auto-play the video in the section for better user experience
             const videoInSection = targetSection.querySelector('video');
             if (videoInSection && sectionId === 'liveBriefing') {
                 // Auto-play breaking news video for immediate impact
                 setTimeout(() => {
                     videoInSection.play().catch(e => console.log('Auto-play prevented:', e));
-                    if (videoMsg) videoMsg.innerText = '🔴 BREAKING NEWS · playing live';
+                    if (videoMsg) videoMsg.innerText = 'BREAKING NEWS · playing live';
                 }, 500);
             }
-            
-            console.log(`✅ Navigated to: ${sectionTitle}`);
+
+            console.log(`Navigated to: ${sectionTitle}`);
         }
     }
-    
+
     // ---- BREAKING NEWS BUTTON: DIRECT TO LIVE BRIEFING ----
     if (alertBtn) {
         alertBtn.addEventListener('click', () => {
             scrollToSection('liveBriefing', 'LIVE BRIEFING · Breaking News', true);
-            
+
             // Add extra pulse effect to the live briefing section
             const liveSection = document.getElementById('liveBriefing');
             if (liveSection) {
@@ -134,10 +134,10 @@
             }
         });
     }
-    
+
     // ---- SIDEBAR NAVIGATION: REDIRECT TO CORRESPONDING VIDEO SECTION ----
     const sidebarNavItems = document.querySelectorAll('.sidebar li');
-    
+
     // Add click handlers to sidebar items
     sidebarNavItems.forEach(item => {
         item.addEventListener('click', () => {
@@ -148,7 +148,7 @@
             }
         });
     });
-    
+
     // Simple notification function
     function showNotification(message) {
         const notification = document.createElement('div');
@@ -167,13 +167,13 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         `;
         document.body.appendChild(notification);
-        
+
         setTimeout(() => {
             notification.style.animation = 'slideOut 0.3s ease-out';
             setTimeout(() => notification.remove(), 300);
         }, 2000);
     }
-    
+
     // Add CSS animations for notification
     const style = document.createElement('style');
     style.textContent = `
@@ -199,19 +199,19 @@
         }
     `;
     document.head.appendChild(style);
-    
+
     // ---- BACK TO HOME BUTTON ----
     function goToHome() {
         closeSidebar();
         const homeSection = document.getElementById('home');
-        homeSection.scrollIntoView({ 
-            behavior: 'smooth', 
+        homeSection.scrollIntoView({
+            behavior: 'smooth',
             block: 'start'
         });
-        
+
         // Remove URL hash
         history.pushState(null, null, ' ');
-        
+
         // Highlight home section
         homeSection.querySelector('.parallax-container').style.animation = 'sectionGlow 0.6s ease-out';
         setTimeout(() => {
@@ -219,18 +219,18 @@
                 homeSection.querySelector('.parallax-container').style.animation = '';
             }
         }, 600);
-        
-        showNotification('🏠 Returned to front page');
-        console.log('🏠 Navigated back to home');
+
+        showNotification('Returned to front page');
+        console.log('Navigated back to home');
     }
-    
+
     backToHomeBtn.addEventListener('click', goToHome);
-    
+
     // Show/hide back to home button based on scroll position
     window.addEventListener('scroll', () => {
         const homeSection = document.getElementById('home');
         const homeBottom = homeSection.getBoundingClientRect().bottom;
-        
+
         if (homeBottom < 0) {
             backToHomeBtn.classList.add('show');
         } else {
@@ -250,33 +250,33 @@
             }
         });
     }
-    
+
     window.addEventListener('scroll', checkScrollVisibility);
     window.addEventListener('resize', () => {
         checkScrollVisibility();
         if (resizeIndicator) {
             resizeIndicator.style.opacity = '1';
-            resizeIndicator.innerText = `📐 ${window.innerWidth}px · responsive`;
+            resizeIndicator.innerText = ` ${window.innerWidth}px`;
             setTimeout(() => {
                 resizeIndicator.style.opacity = '0.6';
             }, 700);
         }
     });
     checkScrollVisibility();
-    
+
     // ---- LIVE BRIEFING VIDEO CONTROLS ----
     if (liveVideo) {
         liveVideo.addEventListener('play', () => {
-            if (videoMsg) videoMsg.innerText = '🔴 LIVE · breaking news coverage';
+            if (videoMsg) videoMsg.innerText = 'LIVE · breaking news coverage';
         });
         liveVideo.addEventListener('pause', () => {
-            if (videoMsg) videoMsg.innerText = '⏸️ live briefing paused';
+            if (videoMsg) videoMsg.innerText = 'live briefing paused';
         });
         liveVideo.addEventListener('ended', () => {
-            if (videoMsg) videoMsg.innerText = '⏹️ briefing ended — replay available';
+            if (videoMsg) videoMsg.innerText = 'briefing ended — replay available';
         });
         liveVideo.addEventListener('loadeddata', () => {
-            if (videoMsg) videoMsg.innerText = '⚡ BREAKING NEWS · ready to watch';
+            if (videoMsg) videoMsg.innerText = 'BREAKING NEWS · ready to watch';
         });
         if (playBtn) playBtn.addEventListener('click', () => liveVideo.play());
         if (pauseBtn) pauseBtn.addEventListener('click', () => liveVideo.pause());
@@ -285,7 +285,7 @@
             liveVideo.play();
         });
     }
-    
+
     // ---- VIDEO CONTROLS FOR ALL TOPIC VIDEOS ----
     const videos = {
         climateVideo: document.getElementById('climateVideo'),
@@ -294,28 +294,28 @@
         spaceVideo: document.getElementById('spaceVideo'),
         marketVideo: document.getElementById('marketVideo')
     };
-    
+
     // Add status updates for each video
     Object.keys(videos).forEach(videoId => {
         const video = videos[videoId];
         if (video) {
             const statusId = videoId.replace('Video', 'Status');
             const statusElement = document.getElementById(statusId);
-            
+
             if (statusElement) {
                 video.addEventListener('play', () => {
-                    statusElement.innerHTML = '▶️ Now playing';
+                    statusElement.innerHTML = 'Now playing';
                 });
                 video.addEventListener('pause', () => {
-                    statusElement.innerHTML = '⏸️ Paused';
+                    statusElement.innerHTML = 'Paused';
                 });
                 video.addEventListener('ended', () => {
-                    statusElement.innerHTML = '⏹️ Ended - click restart';
+                    statusElement.innerHTML = 'Ended - click restart';
                 });
             }
         }
     });
-    
+
     // Add event listeners to all video control buttons
     document.querySelectorAll('.play-specific').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -323,14 +323,14 @@
             if (videos[videoId]) videos[videoId].play();
         });
     });
-    
+
     document.querySelectorAll('.pause-specific').forEach(btn => {
         btn.addEventListener('click', () => {
             const videoId = btn.getAttribute('data-video');
             if (videos[videoId]) videos[videoId].pause();
         });
     });
-    
+
     document.querySelectorAll('.restart-specific').forEach(btn => {
         btn.addEventListener('click', () => {
             const videoId = btn.getAttribute('data-video');
@@ -346,13 +346,13 @@
             e.preventDefault();
             const email = emailInput.value.trim();
             if (email === '') {
-                formFeedback.innerText = '⚠️ email cannot be empty';
+                formFeedback.innerText = 'email cannot be empty';
                 formFeedback.style.color = '#dc2626';
             } else if (!email.includes('@') || !email.includes('.') || email.indexOf('@') === 0) {
-                formFeedback.innerText = '⚠️ enter valid email (e.g., name@domain.com)';
+                formFeedback.innerText = 'enter valid email (e.g., name@domain.com)';
                 formFeedback.style.color = '#dc2626';
             } else {
-                formFeedback.innerText = '✅ subscribed! welcome to event horizon.';
+                formFeedback.innerText = 'subscribed! welcome to event horizon.';
                 formFeedback.style.color = '#16a34a';
                 emailInput.value = '';
                 setTimeout(() => {
@@ -375,8 +375,8 @@
 
     // Resize indicator initial
     if (resizeIndicator) {
-        resizeIndicator.innerText = `📐 ${window.innerWidth}px · adaptive`;
+        resizeIndicator.innerText = `${window.innerWidth}px`;
     }
 
-    console.log('✨ Interactive news active | Breaking news button now redirects to Live Briefing section');
+    console.log('Interactive news active | Breaking news button now redirects to Live Briefing section');
 })();
