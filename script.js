@@ -77,6 +77,12 @@
         if (e.key === 'Escape' && sidebar.classList.contains('open')) {
             closeSidebar();
         }
+        if (e.key === 'o' || e.key === 'O') {
+            openSidebar();
+        }
+        if (e.key === 'c' || e.key === 'C') {
+            closeSidebar();
+        }
     });
 
     // Function to scroll to any section with highlight
